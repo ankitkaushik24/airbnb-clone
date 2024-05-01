@@ -16,6 +16,7 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Image from "next/image";
 import { createOrFindHome } from "@/actions";
 import { FC } from "react";
+import { unstable_noStore } from "next/cache";
 
 const LoggedInMenuContent: FC<{ userId: string }> = ({ userId }) => {
   const createOrFindHomeWithUserId = createOrFindHome.bind(null, userId);
@@ -64,12 +65,9 @@ const LoggedOutMenuContent = () => {
 };
 
 export async function UserNav() {
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
-  //   const createHomewithId = createAirbnbHome.bind(null, {
-  //     userId: user?.id as string,
-  //   });
 
   return (
     <DropdownMenu>

@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import prisma from "@/lib/db";
 import worldCountries from "@/lib/getCountries";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { unstable_noStore } from "next/cache";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,6 +47,7 @@ const getMyHome = (homeId: string) => {
 const MyHome: FC<{ params: { homeId: string } }> = async ({
   params: { homeId },
 }) => {
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const [data, user] = await Promise.all([getMyHome(homeId), getUser()]);
 

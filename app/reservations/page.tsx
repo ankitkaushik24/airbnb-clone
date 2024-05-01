@@ -2,6 +2,7 @@ import { ListingCard } from "@/components/shared/ListingCard";
 import { NoItems } from "@/components/shared/NoItems";
 import prisma from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { unstable_noStore } from "next/cache";
 import { redirect } from "next/navigation";
 
 const getReservations = (userId: string) => {
@@ -24,6 +25,7 @@ const getReservations = (userId: string) => {
 };
 
 const ReservationsPage = async () => {
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 

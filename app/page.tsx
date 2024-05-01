@@ -69,6 +69,7 @@ function SkeletonLoading() {
 }
 
 async function ShowItems({ searchParams }: { searchParams?: ISearchParams }) {
+  unstable_noStore();
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const homes = await getHomes({
